@@ -16,6 +16,7 @@
   },
   "include": [
     "**/src",
+    "test/**.spec.ts",
     "test/text-test-fixture.ts"
   ]
 }
