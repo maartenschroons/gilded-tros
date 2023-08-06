@@ -9,6 +9,62 @@ import org.junit.jupiter.api.Test;
 class GildedTrosTest {
 
 	@Test
+	void testTexttestFixtureNoArgs() {
+		Item[] items = TexttestFixture.main(new String[] {});
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Ring of Cleansening Code", items[0].name),
+				() -> assertEquals(8, items[0].sellIn), () -> assertEquals(18, items[0].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Good Wine", items[1].name),
+				() -> assertEquals(0, items[1].sellIn), () -> assertEquals(2, items[1].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Elixir of the SOLID", items[2].name),
+				() -> assertEquals(3, items[2].sellIn), () -> assertEquals(5, items[2].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("B-DAWG Keychain", items[3].name),
+				() -> assertEquals(0, items[3].sellIn), () -> assertEquals(80, items[3].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("B-DAWG Keychain", items[4].name),
+				() -> assertEquals(-1, items[4].sellIn), () -> assertEquals(80, items[4].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Backstage passes for Re:Factor", items[5].name),
+				() -> assertEquals(13, items[5].sellIn), () -> assertEquals(22, items[5].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Backstage passes for Re:Factor", items[6].name),
+				() -> assertEquals(8, items[6].sellIn), () -> assertEquals(50, items[6].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Backstage passes for HAXX", items[7].name),
+				() -> assertEquals(3, items[7].sellIn), () -> assertEquals(50, items[7].quality));
+	}
+
+	@Test
+	void testTexttestFixture4Days() {
+		Item[] items = TexttestFixture.main(new String[] { "4" });
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Ring of Cleansening Code", items[0].name),
+				() -> assertEquals(5, items[0].sellIn), () -> assertEquals(15, items[0].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Good Wine", items[1].name),
+				() -> assertEquals(-3, items[1].sellIn), () -> assertEquals(5, items[1].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Elixir of the SOLID", items[2].name),
+				() -> assertEquals(0, items[2].sellIn), () -> assertEquals(2, items[2].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("B-DAWG Keychain", items[3].name),
+				() -> assertEquals(0, items[3].sellIn), () -> assertEquals(80, items[3].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("B-DAWG Keychain", items[4].name),
+				() -> assertEquals(-1, items[4].sellIn), () -> assertEquals(80, items[4].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Backstage passes for Re:Factor", items[5].name),
+				() -> assertEquals(10, items[5].sellIn), () -> assertEquals(26, items[5].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Backstage passes for Re:Factor", items[6].name),
+				() -> assertEquals(5, items[6].sellIn), () -> assertEquals(50, items[6].quality));
+
+		assertAll("Verifiy Ring Properties", () -> assertEquals("Backstage passes for HAXX", items[7].name),
+				() -> assertEquals(0, items[7].sellIn), () -> assertEquals(50, items[7].quality));
+	}
+
+	@Test
 	void testNormalItemDegradation() {
 		Item[] items = new Item[] { new Item("Elixir of the SOLID", 5, 7) };
 		GildedTros app = new GildedTros(items);
