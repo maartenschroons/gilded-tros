@@ -36,6 +36,15 @@ class GildedTrosTest {
 
 		assertAll("Verifiy Backstage Pass 3 Properties", () -> assertEquals("Backstage passes for HAXX", items[7].name),
 				() -> assertEquals(3, items[7].sellIn), () -> assertEquals(50, items[7].quality));
+
+		assertAll("Verifiy Code Properties", () -> assertEquals("Duplicate Code", items[5].name),
+				() -> assertEquals(1, items[5].sellIn), () -> assertEquals(2, items[5].quality));
+
+		assertAll("Verifiy Methods Properties", () -> assertEquals("Long Methods", items[6].name),
+				() -> assertEquals(1, items[6].sellIn), () -> assertEquals(2, items[6].quality));
+
+		assertAll("Verifiy Variable Names Properties", () -> assertEquals("Ugly Variable Names", items[7].name),
+				() -> assertEquals(1, items[7].sellIn), () -> assertEquals(2, items[7].quality));
 	}
 
 	@Test
@@ -66,6 +75,15 @@ class GildedTrosTest {
 
 		assertAll("Verifiy Backstage Pass 3 Properties", () -> assertEquals("Backstage passes for HAXX", items[7].name),
 				() -> assertEquals(0, items[7].sellIn), () -> assertEquals(50, items[7].quality));
+
+		assertAll("Verifiy Code Properties", () -> assertEquals("Duplicate Code", items[5].name),
+				() -> assertEquals(-1, items[5].sellIn), () -> assertEquals(0, items[5].quality));
+
+		assertAll("Verifiy Methods Properties", () -> assertEquals("Long Methods", items[6].name),
+				() -> assertEquals(-1, items[6].sellIn), () -> assertEquals(0, items[6].quality));
+
+		assertAll("Verifiy Variable Names Properties", () -> assertEquals("Ugly Variable Names", items[7].name),
+				() -> assertEquals(-1, items[7].sellIn), () -> assertEquals(0, items[7].quality));
 	}
 
 	@Test
@@ -144,6 +162,23 @@ class GildedTrosTest {
 	}
 
 	@Test
+	void testSmellyItemsDegradation() {
+		Item[] items = new Item[] { new Item("Duplicate Code", 5, 7), new Item("Long Methods", 3, 6),
+				new Item("Ugly Variable Names", 3, 6) };
+		GildedTros app = new GildedTros(items);
+		app.updateQuality();
+
+		assertAll("Verifiy Code Properties", () -> assertEquals("Duplicate Code", items[5].name),
+				() -> assertEquals(1, items[5].sellIn), () -> assertEquals(2, items[5].quality));
+
+		assertAll("Verifiy Methods Properties", () -> assertEquals("Long Methods", items[6].name),
+				() -> assertEquals(1, items[6].sellIn), () -> assertEquals(2, items[6].quality));
+
+		assertAll("Verifiy Variable Names Properties", () -> assertEquals("Ugly Variable Names", items[7].name),
+				() -> assertEquals(1, items[7].sellIn), () -> assertEquals(2, items[7].quality));
+	}
+
+	@Test
 	void testMaximumQuality() {
 		Item[] items = new Item[] { new Item("Backstage passes for Re:Factor", 10, 49) };
 		GildedTros app = new GildedTros(items);
@@ -185,7 +220,8 @@ class GildedTrosTest {
 	@Test
 	void testFullWeekMultipleItemsDegradation() {
 		Item[] items = new Item[] { new Item("Ring of Cleansening Code", 20, 20), new Item("Elixir of the SOLID", 5, 7),
-				new Item("Backstage passes for HAXX", 10, 10) };
+				new Item("Backstage passes for HAXX", 10, 10), new Item("Duplicate Code", 5, 7),
+				new Item("Long Methods", 3, 6), new Item("Ugly Variable Names", 3, 6) };
 		GildedTros app = new GildedTros(items);
 		for (int day = 0; day < 7; day++) {
 			app.updateQuality();
@@ -199,6 +235,15 @@ class GildedTrosTest {
 		assertAll("Verifiy Backstage Pass Properties",
 				() -> assertEquals("Backstage passes for HAXX", app.items[2].name),
 				() -> assertEquals(3, app.items[2].sellIn), () -> assertEquals(27, app.items[2].quality));
+
+		assertAll("Verifiy Code Properties", () -> assertEquals("Duplicate Code", items[3].name),
+				() -> assertEquals(-1, items[3].sellIn), () -> assertEquals(0, items[3].quality));
+
+		assertAll("Verifiy Methods Properties", () -> assertEquals("Long Methods", items[4].name),
+				() -> assertEquals(-1, items[4].sellIn), () -> assertEquals(0, items[4].quality));
+
+		assertAll("Verifiy Variable Names Properties", () -> assertEquals("Ugly Variable Names", items[5].name),
+				() -> assertEquals(-1, items[5].sellIn), () -> assertEquals(0, items[5].quality));
 	}
 
 }
