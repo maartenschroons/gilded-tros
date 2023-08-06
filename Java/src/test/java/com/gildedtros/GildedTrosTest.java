@@ -2,6 +2,7 @@ package com.gildedtros;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,14 @@ class GildedTrosTest {
 		app.updateQuality();
 		assertAll("Verifiy Item Properties", () -> assertEquals("Elixir of the SOLID", app.items[0].name),
 				() -> assertEquals(4, app.items[0].sellIn), () -> assertEquals(6, app.items[0].quality));
+	}
+
+	@Test
+	void testEnsureNoNegativeQualityExists() {
+		Item[] items = new Item[] { new Item("Elixir of the SOLID", 5, 0) };
+		GildedTros app = new GildedTros(items);
+		app.updateQuality();
+		assertFalse(app.items[0].quality == -1);
 	}
 
 	@Test
