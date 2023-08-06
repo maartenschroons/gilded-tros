@@ -10,6 +10,8 @@ class GildedTros {
 	private final static String GOOD_WINE = "Good Wine";
 	private final static String BACKSTAGE_PASSES = "Backstage passes";
 	private final static Set<String> LEGENDARY_ITEMS = new HashSet<>(Arrays.asList("B-DAWG Keychain"));
+	private final static Set<String> SMELLY_ITEMS = new HashSet<>(
+			Arrays.asList("Duplicate Code", "Long Methods", "Ugly Variable Names"));
 	private final static Integer MAX_ITEM_QUALITY = 50;
 	private final static Integer BACKSTAGE_PASSES_10DAY_INCREASE_AMOUNT = 2;
 	private final static Integer BACKSTAGE_PASSES_5DAY_INCREASE_AMOUNT = 3;
@@ -26,12 +28,15 @@ class GildedTros {
 				handleBackstagePass(itemsIndex);
 
 				handleGoodWine(itemsIndex);
+
+				handleSmellyItem(itemsIndex);
 			}
 		}
 	}
 
 	private void handleNormalItem(int itemsIndex) {
-		if (!items[itemsIndex].name.equals(GOOD_WINE) && !items[itemsIndex].name.contains(BACKSTAGE_PASSES)) {
+		if (!items[itemsIndex].name.equals(GOOD_WINE) && !items[itemsIndex].name.contains(BACKSTAGE_PASSES)
+				&& !SMELLY_ITEMS.contains(items[itemsIndex].name)) {
 			decreaseItemSellIn(itemsIndex);
 
 			if (isExpired(itemsIndex)) {
@@ -64,6 +69,18 @@ class GildedTros {
 		if (items[itemsIndex].name.equals(GOOD_WINE)) {
 			decreaseItemSellIn(itemsIndex);
 			increaseItemQuality(itemsIndex, 1);
+		}
+	}
+
+	private void handleSmellyItem(int itemsIndex) {
+		if (SMELLY_ITEMS.contains(items[itemsIndex].name)) {
+			decreaseItemSellIn(itemsIndex);
+
+			if (isExpired(itemsIndex)) {
+				decreaseItemQuality(itemsIndex, 4);
+			} else {
+				decreaseItemQuality(itemsIndex, 2);
+			}
 		}
 	}
 
