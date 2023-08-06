@@ -1,5 +1,7 @@
 package com.gildedtros;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 class GildedTros {
@@ -7,7 +9,7 @@ class GildedTros {
 
 	private final static String GOOD_WINE = "Good Wine";
 	private final static String BACKSTAGE_PASSES = "Backstage passes";
-	private final static Set<String> LEGENDARY_ITEMS = Set.of("B-DAWG Keychain");
+	private final static Set<String> LEGENDARY_ITEMS = new HashSet<>(Arrays.asList("B-DAWG Keychain"));
 	private final static Integer MAX_ITEM_QUALITY = 50;
 	private final static Integer BACKSTAGE_PASSES_10DAY_INCREASE_AMOUNT = 2;
 	private final static Integer BACKSTAGE_PASSES_5DAY_INCREASE_AMOUNT = 3;
